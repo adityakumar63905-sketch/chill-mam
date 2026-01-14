@@ -25,43 +25,20 @@
 html,body{margin:0;padding:0}
 body{
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial;
-  background:var(--bg);
-  color:var(--ink);
-  transition:.3s;
+  background:var(--bg); color:var(--ink);
+  transition:background .3s,color .3s;
 }
 
 /* Top */
-.top{
-  position:sticky;top:0;z-index:10;
-  background:#ffffffcc;
-  backdrop-filter:blur(6px);
-  border-bottom:1px solid var(--line);
-}
-.top-inner{
-  max-width:1100px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 20px;
-}
+.top{position:sticky;top:0;z-index:10;background:#ffffffcc;backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.top-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
 h1{margin:0;font-size:clamp(20px,3vw,28px)}
 .controls{display:flex;gap:10px}
-.btn{
-  border:1px solid var(--line);
-  background:var(--card);
-  color:var(--ink);
-  border-radius:999px;
-  padding:8px 14px;
-  font-weight:600;
-  cursor:pointer;
-}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 14px;font-weight:600;cursor:pointer}
 
 /* Layout */
 .wrap{max-width:1100px;margin:0 auto;padding:80px 20px 120px}
-.section{
-  margin:120px 0;
-  opacity:0;
-  transform:translateY(30px);
-  transition:.6s;
-}
+.section{margin:120px 0;opacity:0;transform:translateY(30px);transition:.6s}
 .section.show{opacity:1;transform:none}
 .center{display:grid;place-items:center;gap:22px}
 
@@ -71,68 +48,39 @@ h1{margin:0;font-size:clamp(20px,3vw,28px)}
   border-radius:24px;
   box-shadow:0 30px 60px rgba(0,0,0,.18);
 }
-.dialogue{
-  display:flex;align-items:center;gap:14px;
-  font-size:20px;font-weight:600;
-}
-.heart{
-  width:18px;height:18px;background:var(--accent);
-  position:relative;transform:rotate(-45deg);
-  animation:beat 1.1s infinite;
-}
-.heart:before,.heart:after{
-  content:"";position:absolute;width:18px;height:18px;
-  background:var(--accent);border-radius:50%;
-}
-.heart:before{top:-9px;left:0}
-.heart:after{left:9px;top:0}
+.dialogue{display:flex;align-items:center;gap:14px;font-size:20px;font-weight:600}
+.heart{width:18px;height:18px;background:var(--accent);position:relative;transform:rotate(-45deg);animation:beat 1.1s infinite}
+.heart:before,.heart:after{content:"";position:absolute;width:18px;height:18px;background:var(--accent);border-radius:50%}
+.heart:before{top:-9px;left:0}.heart:after{left:9px;top:0}
 @keyframes beat{50%{transform:rotate(-45deg) scale(1.25)}}
 
-/* New centered line (animated, classy) */
-.favorite{
+/* 2️⃣ Signature effect for favorite line */
+.signature{
+  position:relative;
   margin-top:6px;
   font-size:18px;
   font-weight:700;
   color:var(--muted);
   letter-spacing:.3px;
-  animation:softPulse 2.2s ease-in-out infinite;
 }
-@keyframes softPulse{
-  0%,100%{opacity:.6}
-  50%{opacity:1}
+.signature::after{
+  content:"";
+  position:absolute;left:0;bottom:-6px;height:2px;width:0;
+  background:linear-gradient(90deg,var(--accent),#38bdf8);
+  animation:underline 2s ease forwards;
 }
+@keyframes underline{to{width:100%}}
 
 /* Cards */
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:28px;
-  padding:40px;
-  box-shadow:0 22px 50px rgba(0,0,0,.12);
-}
-.gifbox{
-  display:grid;place-items:center;gap:18px;position:relative
-}
-.gifbox img{
-  max-width:320px;width:100%;
-  border-radius:20px;
-  box-shadow:0 20px 40px rgba(0,0,0,.18);
-}
-.label{
-  position:absolute;top:-14px;left:-14px;
-  width:32px;height:32px;border-radius:50%;
-  display:grid;place-items:center;
-  background:var(--card);
-  border:1px solid var(--line);
-  font-weight:700;
-}
+.card{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:40px;box-shadow:0 22px 50px rgba(0,0,0,.12)}
+.gifbox{display:grid;place-items:center;gap:18px;position:relative}
+.gifbox img{max-width:320px;width:100%;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.18)}
+.label{position:absolute;top:-14px;left:-14px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);font-weight:700}
 .caption{font-size:18px;text-align:center}
 
 /* Grid */
 .row{display:grid;grid-template-columns:1fr 1fr;gap:72px}
-@media(max-width:900px){
-  .row{grid-template-columns:1fr;gap:56px}
-}
+@media(max-width:900px){.row{grid-template-columns:1fr;gap:56px}}
 
 /* Hint glow */
 .hint{box-shadow:0 0 0 rgba(56,189,248,0);animation:hint 1.2s infinite}
@@ -142,24 +90,15 @@ h1{margin:0;font-size:clamp(20px,3vw,28px)}
 .hidden{display:none}
 .overlay{
   position:absolute;left:16px;right:16px;bottom:14px;
-  background:#ffffffee;
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:10px 14px;
-  text-align:center;
-  font-weight:700;
+  background:#ffffffee;border:1px solid var(--line);
+  border-radius:14px;padding:10px 14px;text-align:center;font-weight:700;
 }
 
-/* Memory */
-.memory{
-  margin-top:120px;
-  text-align:center;
-  font-size:22px;
-  font-weight:700;
-  opacity:0;
-  transition:1s;
-}
+/* Memory + 5️⃣ Final emotional punch */
+.memory{margin-top:120px;text-align:center;font-size:22px;font-weight:700;opacity:0;transition:1s}
 .memory.show{opacity:1}
+.punch{margin-top:16px;font-size:18px;color:var(--muted);opacity:0;transition:1s}
+.punch.show{opacity:1}
 
 /* Footer */
 footer{text-align:center;color:var(--muted);margin-top:80px}
@@ -191,8 +130,7 @@ footer{text-align:center;color:var(--muted);margin-top:80px}
     <span id="type1"></span>
     <span class="heart"></span>
   </div>
-  <!-- NEW LINE -->
-  <div class="favorite">M apni favorite hu</div>
+  <div class="signature">M apni favorite hu</div>
 </section>
 
 <!-- GIF 1 -->
@@ -228,6 +166,7 @@ footer{text-align:center;color:var(--muted);margin-top:80px}
 
 <div id="memory" class="memory">
   This page was made just for you. 💙
+  <div id="punch" class="punch">Confidence looks good on you.</div>
 </div>
 
 <footer id="egg" class="hidden">
@@ -246,25 +185,28 @@ document.querySelectorAll('.section').forEach(s=>io.observe(s));
 /* Typewriter */
 function type(el,text,spd=45){
   let i=0;el.textContent="";
-  const t=setInterval(()=>{
-    el.textContent+=text[i++]; if(i>=text.length) clearInterval(t);
-  },spd);
+  const t=setInterval(()=>{el.textContent+=text[i++];if(i>=text.length)clearInterval(t)},spd);
 }
 type(type1,"Mai To Chill Guy hu Ekdam");
 type(type2,"Mai To Sbkoo Ignore Krr Deti Hu.. Issliye to Chill Hu Laadlee",28);
 
-/* Audio */
+/* Audio + 4️⃣ reacts to theme */
 let playing=false;
 muteBtn.onclick=()=>{
-  playing ? (bgm.pause(), muteBtn.textContent="🔇 Unmute")
-          : (bgm.play(),  muteBtn.textContent="🔊 Mute");
+  playing ? (bgm.pause(),muteBtn.textContent="🔇 Unmute")
+          : (bgm.play(),muteBtn.textContent="🔊 Mute");
   playing=!playing;
 };
+function setVolume(){
+  bgm.volume = document.body.dataset.theme ? 0.55 : 0.75;
+}
+setVolume();
 
 /* Theme */
 themeBtn.onclick=()=>{
-  document.body.dataset.theme=document.body.dataset.theme ? "" : "dark";
-  themeBtn.textContent=document.body.dataset.theme ? "☀️" : "🌙";
+  document.body.dataset.theme=document.body.dataset.theme?"":"dark";
+  themeBtn.textContent=document.body.dataset.theme?"☀️":"🌙";
+  setVolume();
 };
 
 /* Smart flow hints */
@@ -279,6 +221,7 @@ btn3.onclick=()=>{
   gif3Text.classList.remove("hidden");
   boxC.classList.remove("hint");
   memory.classList.add("show");
+  setTimeout(()=>punch.classList.add("show"),700);
   localStorage.setItem("visited","yes");
 };
 
@@ -289,3 +232,5 @@ if(localStorage.getItem("visited")==="yes"){
 </script>
 </body>
 </html>
+
+
